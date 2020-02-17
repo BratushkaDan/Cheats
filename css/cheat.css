@@ -1,0 +1,524 @@
+/* import */
+/*@import "cheat.css";*/
+/*@import url(cheat.css);*/
+
+/* Media Queries */
+@media (min-width: 768px) and (max-width: 991px) {}
+a {
+    /* enforced inheritance */
+    color: inherit;
+}
+/* Sprites */
+.icon {
+    background: url(icons-sprite.png);
+    display: inline-block;
+    height: 20px;
+    width: 20px;
+}
+.icon1 {
+    background-position: 0 0;
+}
+.icon2 {
+    background-position: -20px 0;
+}
+/* Variables */
+:root {
+    --font-size: 2em;
+    --font-color: #333;
+}
+
+.usesVariables {
+    font-size: var(--font-size);
+    color: var(--font-color);
+}
+.measure-units {
+    font-size: 2rem; /* 2 * root element font size*/
+    font-size: 2em; /* 2 * parent element font size */
+    width: 50%;
+    height: 100px;
+}
+
+.colors {
+    color: #000;
+    border-color: currentColor/*value of color property of element*/;
+    background-color: rgba(255, 255, 255, 0.23);
+    border-image: url("python.jpg") 30 stretch;
+    border-image:linear-gradient(to right, white 0%, red 20%, chocolate 40%) 1;
+}
+
+.lists {
+    list-style-type: none;
+    /*list-style-image: url(images/icon.png);*/
+    list-style-position: inside; /* outside */
+    list-style: square inside;
+}
+
+.text-shadow {
+    text-shadow: yellow 0 0 3px,
+    green 4px 4px 10px;
+}
+/* Image and Video scaling */
+.object {
+    /*fill, contain, cover, none, scale-down*/
+    object-fit: scale-down; /* fill - enters image to container's width and height, contain - enters image into container width and height on its normal scale */
+    /* cover - enter image to container's width and height and scopes it (parts of image will be out of vision), none - normal */
+    object-position: 40px bottom; /* x, y */
+}
+/* Background*/
+.background {
+    background: url("") no-repeat top /* 0 */ center /* 50% */ /* fixed */,
+    url("") no-repeat top center, #fff;
+    background-attachment: fixed;
+    background-size: cover; /* scales image to fit it the whole block */
+    background-size: contain; /* always inserts whole image inside, parts of block can be blank */
+    background-position: center center;
+}
+.multiple_images {
+    background-image: url(img_1.png), url(img_1.png), url(img_1.png);
+    background-position: right bottom, left top, center center;
+    background-repeat: repeat-y, no-repeat, no-repeat;
+}
+/* Object fit and placement */
+/* Margin and padding */
+.margin, .padding {
+    margin: 0 auto;
+    padding: 15px;
+    /* both don't work for inline elements */
+}
+.div > .margin {
+    margin-left: 10%; /* parentwidth * 1/10 */
+}
+/* Border */
+.border {
+    box-sizing: border-box; /* padding and border are included in width and height
+     default is content-box */
+    border: 2px solid red;
+    border-radius/*-left-radius*/: 50%;
+    border-bottom-color: #eebdec;
+    border-bottom: 3px dotted green;
+    border-width: 1px 2px 3px 4px; /* 1 2: 1 - top and bottom, 2 - left and right */
+    /* 1 2 3: 1 - top, 2 - left and right, 3 - bottom */
+    /* 1 2 3 4: ... */
+    /* border-width, border-style, border-color */
+}
+/* Outline */
+.outline {
+    /* outline doesn't take any space in the box model */
+    outline-style: solid; /* dotted, dashed, solid, double, hidden */
+    /* groove, ridge, inset, outset */
+}
+/* Table */
+table {
+    border-collapse: collapse/* separate - default*/; /* borders are sticked */
+    border-spacing: 7px 15px; /* property for separate collapse */
+    caption-side: bottom /*default is top*/;
+}
+table th,
+table td {
+    height: 30px;
+    border: 2px solid black;
+    text-align: center;
+    vertical-align: middle;
+}
+/* Fonts */
+.fonts {
+    font-family: "Times New Roman", sans-serif; /* serif, monospace, cursive, fantasy */
+    font-style: italic;
+    font-variant: small-caps;
+    font-weight: normal; /* light, bold */
+    font: /*font-style font-variant */ bold 2em Arial, sans-serif;
+}
+/* Text */
+.text {
+    text-decoration: overline; /* line-through, underline, none */
+    text-align: justify /* left, right, center */;
+    text-transform: capitalize; /* uppercase, lowercase */
+    text-indent: 50px; /* indents first paragraph */
+    letter-spacing: -2px;
+    word-spacing: 2px;
+    text-shadow: 2px 2px 3px chocolate; /* x-offset, y-offset, blur, color */
+    direction: rtl; /* ltr,  */
+    white-space: pre-wrap; /* works like <pre></pre> */
+}
+@font-face {
+    font-family: "Chasing Embers One";
+    src: url('fonts/Chasing_Embers_One.otf');
+}
+/* line-height */
+.line {
+    line-height: 2em;
+}
+/* Display and visibility */
+.dv {
+    visibility: hidden;
+    display: none; /* block, inline, inline-block, flex, grid, table-cell, list-item */
+}
+/* Selectors */
+.twoclasses.atthesametime {}
+.multiple, .elements, .selection {}
+div.wrapper > form[action="form.php"][method=post] input#myinput[type="text"][required] {} /* very specific selector */
+div[attr] {}
+div[attr="val"] {}
+div[attr~="val"] {} /* val appears in white-space separated list of attribute */
+div[attr^="val"] {} /* attr begins with val */
+div[attr$="val"] {} /* attr ends with val */
+div[attr*="val"] {} /* attr contains val */
+div[attr|="val"] {} /* attr value is exactly val, or starts with val and followed by - */
+div[attr="val"i] {} /* case insensitive */
+div span {} /* descendant selector */
+div > span {} /* child selector (direct child) */
+div ~ span {} /* siblings after div (any tag between spans will break selection) */
+div + span {} /* adjacent siblings */
+/* Selectors can be used with both pseudo-classes and pseudo-elements */
+
+/* Pseudo-classes */
+:root {} /* element representing document */
+:target {} /* element matching current url anchor fragment */
+:optional {} /* any form, input or textarea that don't have required attribute set on them */
+a:link {} /* unvisited link */ /* a:hover:nth-child(2) */
+a:visited {}
+button:active {} /* clicked by user, ho */
+input:focus {}
+div:hover p {
+    cursor: pointer;
+}
+:checked {} /* applies to radio, checkbox, or option elements that are toggled into an "on" state */
+input:enabled {}
+input:disabled {}
+input:indeterminate {} /* applies radio or checkbox UI which are neither checked nor unchecked */
+input:in-range {}
+input:out-of-range {}
+/* bonus*/
+input {
+    caret-color: #ffa00c;
+}
+/* not */
+input:not([disabled], .example, #main[attr="val"]) {} /* not supports comma-separated parameters */
+/* nth from 1 to 10 */
+div:only-child {} /* element is only child of its parent */
+p:nth-child(3) {} /* 3 */
+p:nth-child(n+3) {} /* from n=0 - 3 */
+p:nth-child(3n) {}
+p:nth-child(3n+1) {} /* 1 4 7 10 */
+p:nth-child(-n+3) {} /* 1 2 3 */
+p:nth-child(odd) {} /* 1 3 5 7 9 */
+p:nth-child(even) {} /* 2 4 6 8 10 */
+p:first-child {} /* 1 */
+p:last-child {} /* 10 */
+p:nth-last-child(3) {} /* 8, for 10 use (1) */
+p > a:first-of-type {}
+p > a:last-of-type {}
+div > p:nth-of-type(3) {} /* selects nth p inside of a div */
+/* Pseudo-elements */
+div::before {}
+div::after {}
+div::first-letter {}
+div::first-line {}
+div::selection {} /* user caret selection */
+input::placeholder {} /* allows to style input's placeholder attribute */
+::grammar-error {} /* highlights grammatically incorrect segments */
+/* Float */
+    /* margins of two floats don't collapse*/
+.float {
+    float: left;
+}
+.element_after_float {
+    display: block;
+    overflow: hidden; /* element doesn't overlap on any floating element  */
+    text-overflow: ellipsis; /* ellipsis where text is cut */
+}
+/* if parent container doesn't have float, it won't stretch out by its children, then
+parent:after with content: "", clear: both and display: block can do it. same thing can be done with overflow: hidden*/
+/* Overflow */
+.overflow {
+    overflow: visible; /* default - shows all overflowing content outside th element */
+    /* scroll, hidden, auto - same as scroll, but doesn't add scroll bar if content fits */
+    overflow-wrap: break-word; /* default - normal; will split the word */
+    overflow-x: hidden; /* properties work exactly as overflow */
+    overflow-y: auto;   /* and accept the same values */
+
+    /* overflow: hidden; also changes the behavior of elements near floating ones */
+}
+/* Position */
+.position {
+    position: fixed; /* relative, absolute */
+    top: 1em;
+    left: 20%;
+    z-index: 1; /* higher index higher priority */
+}
+
+/* Flexbox */
+.flex {
+    display: flex;
+    flex-direction: row /* column */;
+    justify-content: center /* flex-start, flex-end, center, space-between, space-around, space-evenly, stretch */;
+    align-items: stretch /* flex-start, flex-end, center, stretch */;
+    /* width stretch width or height has to be disabled */
+    flex-wrap: wrap; /*nowrap, wrap, wrap-reverse*/
+
+    flex-flow: row wrap; /*flex-direction flex-wrap*/
+}
+.flex-element {
+    flex-basis: 200px; /* defines size on main direction */
+    flex-grow: 1; /* 0-int */
+    flex-shrink: 0; /* element doesn't shrink */
+    flex-shrink: 1; /* element shrinks */
+    flex: 1 1 100px; /* flex-grod, flex-shrink, flex-basis */
+    align-self: flex-end;
+    justify-self: center;
+    order: 5; /* more value, closer element to right */
+    /* margin works vertically in flex */
+}
+
+/* min-width, min-height, max-width, max-height */
+.positioning {
+    min-width: 100px;
+    max-height: 500px;
+    overflow: hidden;
+}
+
+/* Grid */
+.grid {
+    display: grid;
+    grid-template-columns: 500px 200px 100px; /* first column is 500px, second is 200px, third is 100px */
+    grid-template-rows: 100px 150px 50px; /* same with rows */
+    grid-template: 100px 150px / 200px; /* row1 row2 / column1 */
+    grid-auto-rows: 150px; /* all unspecified rows are 150px */
+    grid-gap: 20px;
+    grid-column-gap: 10px;
+    grid-row-gap: 15px;
+
+}
+.grid {
+    grid-template-rows: 1fr 2fr 50px; /* 3fr here, fr = (height - 50px) / 3) */
+    grid-template-columns: 250px repeat(4, 1fr) 250px;
+    grid-template: repeat(4, 1fr 2fr 50px) / 1fr;
+}
+.grid {
+    grid-template-columns: repeat(3, minmax(150px, 1fr) 1fr);
+    grid-auto-rows: minmax(100px, auto); /* 1fr is different from auto, 1fr forces every element to stretch if content in one element is large, auto stretches just that element */
+}
+.grid {
+    /* doesn't work without grid-template-rows */
+    grid-auto-flow: column; /* row value is default */
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* auto-fit splits elements if they overflow  */
+    grid-template-rows: repeat(auto-fill, minmax(70px, 1fr)); /* same as auto-fit, but not greedy */
+}
+.grid div:nth-child(1) {
+    /*grid-column-start: 2;*/
+    /*grid-column-end: 4;*/
+
+    grid-row-start: 1;
+    grid-row-end: 3;
+
+    /*grid-column-start: 1;
+    grid-column-end: -1;*/
+
+    /*grid-column: 1/-1;*/
+    /*grid-row: 1/4;*/
+}
+/* aligning */
+.grid {
+    /* align horizontally */
+    justify-items: start;
+    /* align vertically */
+    align-items: flex-end;
+}
+/* aligning content of certain element*/
+.grid div:nth-child(10) {
+    grid-row: 1/2;
+    grid-column: 4/5;
+    align-self: center;
+    justify-self: center;
+}
+/* grid-template-areas */
+.gridTemplateAreas {
+    grid-template-areas:
+        "_header _header _header"
+        "_nav _main _aside"
+        ". _main _voting"
+        "_footer _footer _footer";
+}
+.header {
+    grid-area: _header;
+    /* styles */
+}
+.nav {
+    grid-area: _aside;
+    /* styles */
+}
+
+/* Columns */
+.columns {
+    column-count: 3;
+    column-width: 200px;
+    column-gap: 50px;
+    column-rule: 2px solid #eee; /* border between columns */
+    columns: 150px 4; /* column-width column-count */
+    column-fill: balance; /* columns filled equally */
+    column-fill: auto; /* first columns filled to their max height */
+}
+.columnElement {
+    column-span: all; /* stretches element to all columns width */
+    break-inside: avoid; /* avoids breaks for element */
+    break-before: column; /* starts at a separate column */
+    break-after: column; /*  ends at a separate column */
+}
+
+/* Background-blend-mode */
+.backgroundBlendMode {
+    background: url("img.png"), green;
+    background-blend-mode: multiply /* color-burn and many others */;
+}
+/* color function */
+.filter {
+    filter: blur(5px);
+    /* brightness(100%), contrast(100%), drop-shadow(0 0 10px green) - x, y, blur, color  */
+    /* grayscale(100%), hue-rotate(180deg) - tons an image, invert(100%), saturate(100%) - from 0 to 100+%  */
+    /* sepia(100%), none */
+}
+/* functions */
+.element {
+    height: calc(100% - 20px + 1vh);
+    background: linear-gradient(to left top /*direction - can be specified with deg*/, red /* 10% - saturation */, orange, yellow);
+    background: linear-gradient(to right, red 20%, green 20%, green 40%, blue 40%, blue 60%, maroon 60%, maroon 80%, chocolate 80%);
+    background: radial-gradient(circle farthest-corner at bottom right, orange, yellow);
+    background: repeating-linear-gradient(-45deg, red 10%, white 20%, yellow 10%);
+    background: repeating-linear-gradient(red, red 10%, white 20%, yellow 10%);
+    background: repeating-radial-gradient(white, red 10%, white 20%, purple 30%, green 25%, blue 40%);
+    background: repeating-radial-gradient(red, red 10%, white 20%, yellow 10%);
+}
+/* opacity */
+.opacity {
+    opacity: 1;
+    opacity: .23;
+}
+/* Box-shadow */
+.boxshadow {
+    /* x-offset, y-offset, blur-radius, spread-radius, color */
+    box-shadow: /* inset */10px 5px 5px 2px bisque, /* inset property makes shadow inner*/
+    -9px -4px 6px #eebdec,
+    15px -17px 5px #4EDFFF50; /* multiple shadows can be applied */
+}
+/* Transition */
+.transition {
+    transition-property: width, height;
+    transition-duration: .87s, 400ms;
+    transition-timing-function: linear; /* ease, ease-in, ease-out, ease-in-out, linear, steps() */
+    /* cubic-bezier(xP1, yP1, xP2, yP2) */
+    transition-delay: .23s, .57s;
+}
+/* Animation */
+@keyframes rainbow-background {
+    0% { background-color: #ff0000; }
+    8.333% { background-color: #ff8000; }
+    16.667% { background-color: #ffff00; }
+    25.000% { background-color: #80ff00; }
+    33.333% { background-color: #00ff00; }
+    41.667% { background-color: #00ff80; }
+    50.000% { background-color: #00ffff; }
+    58.333% { background-color: #0080ff; }
+    66.667% { background-color: #0000ff; }
+    75.000% { background-color: #8000ff; }
+    83.333% { background-color: #ff00ff; }
+    91.667% { background-color: #ff0080; }
+    100% { background-color: #ff0000; }
+}
+.ranbow-background {
+    animation: rainbow-background 2s;
+}
+.animation {
+    /* animation: name, duration, iteration-count(optional), animation-delay(optional), animation-timing-function(optional) */
+    animation-name: name;
+    animation-duration: 5s;
+    animation-iteration-count: infinite; /*int*/
+    animation-delay: 1s;
+    /*animation-timing-function: ease;*/ /* starts slowly, goes fast and ends slowly */
+    /*animation-timing-function: ease-in;*/ /* starts slowly, ends fast */
+    /*animation-timing-function: ease-out;*/ /* starts fast,ends slowly */
+    /*animation-timing-function: ease-in-out;*/ /* starts slowly, ends slowly */
+    /*animation-timing-function: linear;*/
+    /*animation-timing-function: step-start;*/ /* no animation, styles are end-state immediately */
+    /*animation-timing-function: step-end;*/ /* no animation, styles are end-state after duration end */
+    /*animation-timing-function: steps(9);*/ /* step function */
+    /*http://cubic-bezier.com*/
+    animation-timing-function: step-start;
+    /*animation-direction: normal;*/ /* from start to end, then returns to initial state */
+    /*animation-direction: alternate;*/ /* from start to end, then gradually returns to initial state */
+    /*animation-direction: reverse;*/ /* animation plays from end to start then returns to initial state*/
+    animation-direction: alternate-reverse; /* animation plays from end to start, then gradually returns to initial state*/
+    animation-fill-mode: forwards; /* stays at the end state once animation finished */
+    animation-play-state: paused;
+    /* will-change property may increase performance when used not often, applied transformations should be specified: */
+    will-change: transform, opacity; /* all */
+    /* better to remove property once all changes are performed */
+}
+.animationShorthand {
+    animation: 3s ease 1s 2 reverse both paused slidein;
+    /* duration, timing-function, delay, iteration-count, direction, fill-mode, play-state, name */
+}
+/* Transformation */
+.rotate {
+    transform: rotate(-90deg);
+}
+.transform {
+    transform: rotateX(60deg); /* shrinks vertically */
+    transform: rotateY(130deg); /* rotates over vertical line */
+    transform: rotateZ(50deg); /* rotates clockwise */
+    transform: rotate3d(0, 1, 1, 180deg); /* x, y, z, deg */
+    /*preserve-3d | flat*/
+    transform-style: preserve-3d;
+}
+.scale {
+  transform: scale(1.2, .9); /* x, y scale */
+}
+.perspective {
+    transform: perspective(200px); /* sort of scale for transform */
+    /* higher perspective - lower effect */
+}
+.perspective:hover {
+    transform: perspective(200px) rotate3d(0, 1, 1, 180deg);
+}
+.origin {
+    transform-origin: right bottom; /* x, y */
+    transform-origin: center center 40px; /* x, y, z */
+    /* property sets the point where observer watches */
+    perspective-origin: top right;
+    backface-visibility: hidden; /* default - visible */
+}
+.skew {
+    /* distortion */
+    transform: skewX(20deg);
+    transform: skewY(-15deg);
+    transform: skew(20deg, -15deg);
+}
+.translate {
+    transform: translateX(100px);
+    transform: translateY(100px);
+    transform: translateZ(100px); /* moves object to observer's vision, negative values move from observer */
+    transform: translate3d(100px, 100px, 100px);
+}
+.matrix {
+    /*
+2 - Изменение масштаба по горизонтали.
+Значение больше 1 расширяет элемент, меньше 1, наоборот, сжимает.
+
+-0.5 - Наклон по вертикали. Положительное значение
+наклоняет вверх, отрицательное вниз.
+
+1.5 - Наклон по горизонтали. Положительное значение
+наклоняет влево, отрицательное вправо.
+
+0.7 - Изменение масштаба по вертикали. Значение больше
+1 расширяет элемент, меньше 1 — сжимает.
+
+100 - Смещение по горизонтали в пикселях. Положительное значение
+сдвигает элемент вправо на заданное число пикселей,
+отрицательное значение сдвигает влево.
+
+200 - Смещение по вертикали в пикселях. При положительном значении
+элемент опускается на заданное число пикселей вниз или вверх
+при отрицательном значении.
+ */
+    transform: matrix(2, -0.5, 1.5, 0.7, 100, 200);
+}

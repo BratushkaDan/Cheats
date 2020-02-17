@@ -1,0 +1,33 @@
+@import "../../bootstrap-4.0.0-beta.2/scss/bootstrap";
+
+.one {
+  color: red;
+
+  @include media-breakpoint-up(md) {
+    color: green;
+  }
+}
+
+.two {
+  background: #5b82bd;
+
+  @include media-breakpoint-down(md) {
+    background: #ffe500;
+  }
+}
+
+.three {
+  background: #00b2bd;
+
+  @include media-breakpoint-only(md) {
+    background: #ff0746;
+  }
+}
+
+.four {
+  background: #bd30a8;
+
+  @include media-breakpoint-between(xs, sm) {
+    background: #82ff50;
+  }
+}

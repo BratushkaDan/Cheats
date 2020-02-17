@@ -1,0 +1,51 @@
+.double-border {
+    border: 3px solid black;
+    /*1*/box-shadow: 0 0 0 12px greenyellow;
+    /*2*/outline: 6px solid #eebdec;
+}
+/* centering can be achived using flexbox and align-items/self-align property */
+/* centering one line of text in a container */
+.c {
+    height: 300px;
+    line-height: 300px;
+}
+/* vertical align of anything in just 3 lines of code */
+.valign {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+/* table-cell */
+.element {
+    display: table-cell;
+    vertical-align: middle;
+}
+/* translation */
+.translate {
+    transition: 5s;
+}
+.translate {
+    transform: translate3d(200px, 200px, 0);
+}
+/* translation is ~5 times faster than top: x, left: y when it comes with transition */
+/* bottom only border */
+.round {
+    width: 300px;
+    height: 300px;
+    background: #00b3ee;
+}
+.round::after {
+    content: "";
+    display: block;
+    width: 290px;
+    position: absolute;
+    z-index: -1;
+    margin: 299px 0 0 5px;
+    box-shadow: 0 0 8px 2px red;
+}
+
+/* move footer to the bottom */
+body {
+    display: grid;
+    grid-template-rows: 200px minmax(500px, 1fr) 200px;
+}

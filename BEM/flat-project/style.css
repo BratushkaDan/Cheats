@@ -1,0 +1,28 @@
+/*этот файл является сборщиком других файлов, т.е. компилируем только этот файл.
+Все оставльные файлы подключаем сюда.
+ */
+.anotherNav__item {
+  padding: 2px 5px;
+  color: red;
+}
+.anotherNav__item_active {
+  color: red;
+}
+.button {
+  border: none;
+  background: #1b6d85;
+  color: #fff;
+  padding: 15px 25px;
+}
+.button_active {
+  color: green;
+  background: #81ff96;
+}
+.nav__item {
+  padding: 4px 10px;
+  color: black;
+}
+.nav__item_active {
+  font-weight: bold;
+  background: #ffc7c7;
+}
