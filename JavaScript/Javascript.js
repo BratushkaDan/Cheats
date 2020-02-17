@@ -1,32 +1,36 @@
+// ----- Operations
+let n = 5 ** 3;
 // ----- Arrays
 const array = [];
-Array.isArray();
+Array.isArray(Array.prototype);
 Array.of();
-Array.from();
-array.join();
-array.indexOf();
-array.slice();
-array.concat();
-array.push();
-array.pop();
-array.shift();
-array.unshift();
-array.splice();
-array.forEach();
-arr.filter();
-arr.map();
-arr.every();
-arr.some();
-arr.reduce();
-arr.reduceRight();
-arr.find();
-arr.findIndex();
-arr.copyWithin(target, start, end);
-arr.includes();
-arr.sort();
+Array.from("foo"); // ["f", "o", "o"]
+Array.from("foo", str => str.repeat(3)); // ["fff", "ooo", "ooo"]
+Array.prototype.join();
+Array.prototype.indexOf(element);
+Array.prototype.slice();
+Array.prototype.concat();
+Array.prototype.push();
+Array.prototype.pop();
+Array.prototype.shift();
+Array.prototype.unshift();
+Array.prototype.splice();
+Array.prototype.forEach();
+Array.prototype.filter();
+Array.prototype.map();
+Array.prototype.every();
+Array.prototype.some();
+Array.prototype.reduce();
+Array.prototype.reduceRight();
+Array.prototype.find();
+Array.prototype.findIndex();
+Array.prototype.copyWithin(target, start, end);
+Array.prototype.includes();
+Array.prototype.sort();
+Array.prototype.flat(depth);
 // ----- Strings
 const string = "";
-string.split();
+string.split(separator);
 string.startsWith();
 string.endsWith();
 string.includes();
@@ -40,10 +44,11 @@ string.substr();
 string.padStart(int, string);
 string.endStart(int, string);
 // ----- Numbers
-parseInt();
-parseFloat();
-number.toFixed();
-number.toPrecision();
+parseInt(10.3);
+parseFloat(10.4);
+Math.trunc(13.37); /* returns integer part of number */
+Number.prototype.toFixed();
+Number.prototype.toPrecision();
 Number.isNaN();
 Number.isFinite();
 Number.isInteger();
@@ -52,13 +57,13 @@ Number.isSafeInteger();
 JSON.parse(json, callback);     // callback(key, value)
 JSON.stringify(obj, callback);  // callback(key, value)
 // ----- Object
-object.toString();
-object.valueOf();
-object.hasOwnProperty();
-object.getOwnPropertyDescriptors();
-Object.keys(object);
-Object.values(object);
-Object.entries(object);
+Object.prototype.toString();
+Object.prototype.valueOf();
+Object.prototype.hasOwnProperty();
+Object.prototype.getOwnPropertyDescriptors();
+Object.keys(Object.prototype);
+Object.values(Object.prototype);
+Object.entries(Object.prototype);
 Object.is(object, object2);
 Object.assign(object2, object);
 // ----- Maps
@@ -86,7 +91,7 @@ const descriptor = {
     configurable: boolean, // property is deletable and changeable
     enumerable: boolean, // visible for iterators
 }
-Object.defineProperty(object, "property", descriptor);
+Object.defineProperty(Object.prototype, "property", descriptor);
 // ----- Proxy
 let obj = { a: 1 },
     handlers = {
@@ -113,7 +118,7 @@ let obj = { a: 1 },
     prevoke();
 //----- Iterator
 let array = [1, 2, 3];
-it = array[Symbol.iterator]();
+let it = array[Symbol.iterator]();
 it.next();
 //----- Generators
 function *generator() {
@@ -152,6 +157,8 @@ const Fib = {
 };
 //----- Promises
 const promise = new Promise((res, rej) => {});
+promise.then(result => {}, reject => {}).catch((err)=>{});
+promise.catch(err => {});
 //-- Paralell use of Promises
 Promise.all(promise, promise2).then(result => {
     console.log(result); // result — array of promises' results
@@ -163,7 +170,7 @@ Promise.race(promise, promise2).then(result => {
 node.focus(); // adds focus on input/textarea
 node.blur(); //  removes focus from input/textarea
 //----- Labels
-Labels can be assigned to for loops or blocks of code (loop1: {});
+/*Labels can be assigned to for loops or blocks of code (loop1: {});*/
 continue loop1, break loop1; // used to whether continue loop1 or break it
 //----- Import/Export
 import { foo as bar } from "./baz";
@@ -171,15 +178,16 @@ import { default as bar } from "./baz";
 import * as foo from "foo"; // foo.bar(), foo.baz()
 // ----- Regex
 //Flags
-i - regex isn’t case sensitive, g - all matches, m - multiline mode.
-str.search(reg) — searches for first match or return -1.
-str.match(reg) — without g: returns result, result[0] - first match, result[n] - other matches(if reg grouped by parentheses), result.index - position of match, result.input - str;
-— with g: returns array of matches, null if there’s no matches.
-str.split(reg|substring, limit) — breaks str into an array using reg, can limit up amount of items.
-str.replace(reg, str|func) — replaces all the matches of reg, argument can use: $n - inserts n, $& - inserts all the matches, $` - inserts str part before of match, $’ - inserts str part after the match, func cat take the following ars: func(str, [,p1,p2,..], offset, s) — str - found match, [,p1,p2…] - parentheses content(if they’re present), offset - position where match was found, s - initial string.
-regex.test(str) — returns true/false if there’s a match
-regex.exec(str) — searches for matches: regex.lastIndex shows where the search is carrying out.
-Classes and special symbol
+/*i - regex isn’t case sensitive, g - all matches, m - multiline mode.*/
+String.prototype.search(reg) /*— searches for first match or return -1.*/
+String.prototype.match(reg) /*— without g: returns result, result[0] - first match, result[n] - other matches (if reg grouped by parentheses), result.index - position of match, result.input - str;
+— with g: returns array of matches, null if there’s no matches. */
+String.prototype.split(reg|substring, limit) — /*breaks str into an array using reg, can limit up amount of items.*/
+String.prototype.replace(reg, String.prototype|Function.prototype) /*— replaces all the matches of reg, argument can use: $n - inserts n, $& - inserts all the matches, $` - inserts str part before of match, $’ - inserts str part after the match, func cat take the following ars: func(str, [,p1,p2,..], offset, s) — str - found match, [,p1,p2…] - parentheses content(if they’re present), offset - position where match was found, s - initial string.*/
+regex.test(str) /*— returns true/false if there’s a match*/
+regex.exec(str) /*— searches for matches: regex.lastIndex shows where the search is carrying out.
+Classes and special symbol*/
+/*
 \d - digit, symbol from 0 to 9, \D - not a digit,
 \s - space/tab|str-break, \S - not a space
 \w - word, \w - not a word,
@@ -205,3 +213,4 @@ To use grouping without storing data inside of parentheses use “?:” g.e.:  (
 ^ — at the regex with m flag is the string beginning,
 $ — at the end of regex defines text ending, 
 $ — at the end of regex with m flag is the string ending.
+*/
