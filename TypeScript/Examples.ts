@@ -1,4 +1,4 @@
-// -- readonly
+  // -- readonly
 interface Point {
   readonly x: number;
   readonly y: number;
@@ -22,7 +22,7 @@ const add: (baseValue: number, increment: number) => number = (x, y) => {
   }
   const identity: GenericIdentityFn = (arg) =>  {
     return arg;
-  }
+  };
   
   interface GivenIdentityFn<T> {
     (arg: T): T;
@@ -30,10 +30,10 @@ const add: (baseValue: number, increment: number) => number = (x, y) => {
   interface IProps {
     color: "string"
   }
-  const identity: GivenIdentityFn<IProps> = (arg: IProps) =>  {
+  const identityTwo: GivenIdentityFn<IProps> = (arg: IProps) =>  {
     return arg;
     // to get round invokation typification use identity(<IProps>{}) or identity({} as IProps) 
-  }
+  };
   
   function loggingIdentityAlternative<T>(arg: Array<T>): Array<T> {
     // or alternative (arg: T[]): T[]
@@ -69,3 +69,38 @@ const add: (baseValue: number, increment: number) => number = (x, y) => {
   // NonNullable<T> -- Constructs a type by excluding null and undefined from T
   // ReturnType<T> -- Constructs a type consisting of the return type of function T.
   // Required<T> -- makes all optional properties required
+
+  enum TrafficLight {
+    Green, Yellow, Red
+  }
+  enum SocialMedia {
+    INSTAGRAM = "INSTAGRAM",
+    FACEBOOK = "FACEBOOK",
+    YOUTUBE = "YOUTUBE",
+    LINKEDIN = "LINKEDIN"
+  }
+
+
+  type AlertType = 'success' | 'warning' | 'error'
+
+
+  const reverse = <T>(array: Array<T>): Array<T> => array.reverse();
+
+
+  interface Person {
+    name: string
+    age: number
+  }
+
+  type PersonKeys = keyof Person;
+  let key: PersonKeys = 'name';
+
+  type User = {
+    _id: number
+    name: string
+    email: string
+    created: Date
+  }
+
+  type UserKeysNoMeta = Exclude<keyof User, '_id' | 'created'>
+  type UserKeysNoMeta1 = Pick<User, 'name' | '_id'>
