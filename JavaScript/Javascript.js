@@ -214,3 +214,28 @@ To use grouping without storing data inside of parentheses use “?:” g.e.:  (
 $ — at the end of regex defines text ending, 
 $ — at the end of regex with m flag is the string ending.
 */
+
+// AJAX
+const url = 'https://jsonplaceholder.typicode.com/users/10';
+
+const xhr = new XMLHttpRequest();
+
+xhr.open('GET', url);
+xhr.responseType = 'json';
+xhr.setRequestHeader('Content-Type', 'application/json');
+
+xhr.onreadystatechange = () => {
+    if (xhr.status === 200 && xhr.response) {
+        console.log(xhr.response);
+    }
+    if (xhr.status === 404) {
+        console.log({status: 404, response: xhr.response});
+    }
+};
+// xhr.onload = () => {};
+xhr.onerror = () => {
+    console.log(xhr.response);
+};
+
+xhr.send();
+// if POST - xhr.send(JSON.stringify({/*content here*/}));
