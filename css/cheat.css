@@ -210,10 +210,10 @@ p > a:first-of-type {}
 p > a:last-of-type {}
 div > p:nth-of-type(3) {} /* selects nth p inside of a div */
 /* Pseudo-elements */
-div::before {}
-div::after {}
-div::first-letter {}
-div::first-line {}
+div:before {}
+div:after {}
+div:first-letter {}
+div:first-line {}
 div::selection {} /* user caret selection */
 input::placeholder {} /* allows to style input's placeholder attribute */
 ::grammar-error {} /* highlights grammatically incorrect segments */

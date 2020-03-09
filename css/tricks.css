@@ -34,7 +34,7 @@
     height: 300px;
     background: #00b3ee;
 }
-.round::after {
+.round:after {
     content: "";
     display: block;
     width: 290px;

@@ -1,62 +1,92 @@
-// ----- Operations
-let n = 5 ** 3;
+// all valid operations: +=, -=, *=, /=, %=, <<=, >>=, >>>=, &=, ^=, = ~int, = |, = &,
+
+// Simple values are assigned/passed by value-copy: null, undefined, string, number, boolean and symbol
+// Compound values objects(arrays, functions, boxed value-wrappers) are assigned/passed by reference
+
+// "" is falsy value
+// function is subtype of object with [[Call]] property
+
 // ----- Arrays
-const array = [];
 Array.isArray(Array.prototype);
 Array.of();
-Array.from("foo"); // ["f", "o", "o"]
+Array.from("foo"); // ["f", "o", "o"], deduces array-like objects, maps and sets
 Array.from("foo", str => str.repeat(3)); // ["fff", "ooo", "ooo"]
 Array.prototype.join();
-Array.prototype.indexOf(element);
-Array.prototype.slice();
 Array.prototype.concat();
-Array.prototype.push();
-Array.prototype.pop();
-Array.prototype.shift();
-Array.prototype.unshift();
-Array.prototype.splice();
+Array.prototype.indexOf();
+Array.prototype.slice(from, to); // [from:to)     // can copy an array with no arguments
+Array.prototype.push(); // returns position
+Array.prototype.pop(); // returns element
+Array.prototype.shift(); // returns element
+Array.prototype.unshift(); // returns position
+Array.prototype.splice(start, deletecount, ...args); // returns an array of deleted elements
+// only start specified deletes element at index start, deletecount = 0 inserts args before start
 Array.prototype.forEach();
-Array.prototype.filter();
-Array.prototype.map();
-Array.prototype.every();
-Array.prototype.some();
-Array.prototype.reduce();
+Array.prototype.map(e, i, arr);
+Array.prototype.filter(e, i);
+Array.prototype.every(e, i);
+Array.prototype.some(e, i);
+Array.prototype.reduce((accumulator, currentValue) => accumulator + currentValue);
 Array.prototype.reduceRight();
-Array.prototype.find();
-Array.prototype.findIndex();
-Array.prototype.copyWithin(target, start, end);
+Array.prototype.find(e, i);
+Array.prototype.findIndex(e, i);
+Array.prototype.copyWithin(target, start, end); /* [start:end) */ // target - index at which to copy sequence to ( can be negative)
+// start - index at which to copy sequence from, default = 0
+// end - index at which to end copying elements from, default = last index
 Array.prototype.includes();
-Array.prototype.sort();
+Array.prototype.sort((first, second) => second - first); // desc
 Array.prototype.flat(depth);
 // ----- Strings
+/*string is immutable, what is opposed to an array, though some methods can be borrowed from the array*/
+console.log(Array.prototype.map.call("Hello, World!", val => val.repeat(2)));
 const string = "";
-string.split(separator);
+string.split();
 string.startsWith();
 string.endsWith();
 string.includes();
 string.repeat();
 string.charAt();
+string.charCodeAt();
+string.trim();
+string.trimStart();
+string.trimEnd();
 string.indexOf();
 string.lastIndexOf();
 string.concat(separator, [...args]);
 string.slice();
-string.substr();
-string.padStart(int, string);
-string.endStart(int, string);
+// LEGACY FUNCTION substr
+string.substr(idx, extent); // returns string from idx to end, or from idx + extent chars after
+string.padStart(int, string); // replace everything to int with string(repeat)
+string.padEnd(int, string);// replace everything from int to end with string(repeat)
 // ----- Numbers
+// is number 5e10 // 50000000000
+Number.prototype.toExponential(); // returns number in exponential form
 parseInt(10.3);
 parseFloat(10.4);
 Math.trunc(13.37); /* returns integer part of number */
-Number.prototype.toFixed();
-Number.prototype.toPrecision();
+
+let num1 = 42.59;
+// output for the two following functions is string type
+// how many fractional decimal places
+num1.toFixed(0); // "43"
+num1.toFixed(1); // "42.6"
+num1.toFixed(2); // "42.59"
+num1.toFixed(3); // "42.590"
+// how many significant digits
+num1.toPrecision(1); // "4e+1"
+num1.toPrecision(2); // "43"
+num1.toPrecision(3); // "42.6"
+num1.toPrecision(4); // "42.59"
+num1.toPrecision(5); // "42.590"
+
 Number.isNaN();
 Number.isFinite();
 Number.isInteger();
 Number.isSafeInteger();
-// ----- JSON
-JSON.parse(json, callback);     // callback(key, value)
-JSON.stringify(obj, callback);  // callback(key, value)
 // ----- Object
+const object = {
+    [Date.now() + 'this is still an object parameter']: 'hey'
+};
 Object.prototype.toString();
 Object.prototype.valueOf();
 Object.prototype.hasOwnProperty();
@@ -86,10 +116,10 @@ set.size;
 const wset = new WeakSet();
 // ----- Descriptors
 const descriptor = {
-    value: value,
-    writable: boolean,
-    configurable: boolean, // property is deletable and changeable
-    enumerable: boolean, // visible for iterators
+    value,
+    writable: true, // property may be changed with assignment operator
+    configurable: true, // property is deletable and type of this property descriptor may be changed
+    enumerable: false, // visible for iterators
 }
 Object.defineProperty(Object.prototype, "property", descriptor);
 // ----- Proxy
@@ -155,27 +185,30 @@ const Fib = {
         }
     }
 };
-//----- Promises
+// ----- Closures
+function makeAdder(x) {
+    function add(y) {
+        return x + y;
+    }
+    return add;
+}
+const adder = makeAdder(1); // adder(y)
+// ----- Promises
 const promise = new Promise((res, rej) => {});
-promise.then(result => {}, reject => {}).catch((err)=>{});
+promise
+  .then(result => {}, reject => {})
+  .catch(err => {});
 promise.catch(err => {});
-//-- Paralell use of Promises
-Promise.all(promise, promise2).then(result => {
-    console.log(result); // result — array of promises' results
-});
-Promise.race(promise, promise2).then(result => {
-    console.log(result); // result - result of first resolved promise
-});
-//----- blur(), focus();
-node.focus(); // adds focus on input/textarea
-node.blur(); //  removes focus from input/textarea
-//----- Labels
-/*Labels can be assigned to for loops or blocks of code (loop1: {});*/
-continue loop1, break loop1; // used to whether continue loop1 or break it
-//----- Import/Export
-import { foo as bar } from "./baz";
-import { default as bar } from "./baz";
-import * as foo from "foo"; // foo.bar(), foo.baz()
+// -- Paralell use of Promises
+Promise.all(promise, promise2)
+  .then(result => console.log(result)); /* result is array of promises' result */
+Promise.race(promise, promise2)
+  .then(result => console.log(result)); /* result - result of first resolved promise */
+// ----- blur(), focus();
+node.focus();
+node.blur();
+// ----- Labels
+/*Labels can be assigned to for loops or blocks of code and used with break, continue keywords  */
 // ----- Regex
 //Flags
 /*i - regex isn’t case sensitive, g - all matches, m - multiline mode.*/
@@ -215,7 +248,7 @@ $ — at the end of regex defines text ending,
 $ — at the end of regex with m flag is the string ending.
 */
 
-// AJAX
+// ----- AJAX
 const url = 'https://jsonplaceholder.typicode.com/users/10';
 
 const xhr = new XMLHttpRequest();
@@ -237,5 +270,4 @@ xhr.onerror = () => {
     console.log(xhr.response);
 };
 
-xhr.send();
-// if POST - xhr.send(JSON.stringify({/*content here*/}));
+xhr.send(/*(JSON.stringify(data) - for POST*/);

@@ -1,14 +1,10 @@
-@import "_variables.scss";
-@import "_mainPage.scss";
-@import "_props.scss";
-
 $variableColor: #5AFF9E;
 .parent {
   &.child {} // has to have two classes
   &-sm {} // ampesand is used to generate names
   &-md {}
   &-lg {}
-  @media (max-width: 1199px) {} // media can be incapsulated into a selector
+  @media (max-width: 1199px) {} // media can be encapsulated into a selector
 
 }
 
@@ -43,7 +39,7 @@ $variableColor: #5AFF9E;
 }
 // calc function
 .element {
-  height: #{calc(400px + 5%)}; // interpolation - NOT NECE
+  height: calc(400px + 5%);
 }
 // mixins
 
@@ -167,7 +163,7 @@ $i: 6;
 }
 /* Maps */
 $map: (key1: value1, key2: value2, key3: value3);
-map-get($map, key1);
+map-get($map, 'key1');
 /* Lists */
 $list: (a b c);
 nth($list, 1)  // starts with 1

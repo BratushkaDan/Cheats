@@ -1,19 +1,15 @@
-import User from "./User"; // .ts, .js is not written
+// props.children - component's value that represents passed inside content
 
-const mapUsers = data => {
-    return data.map((user, key) => <User key={key} {...user} />); // component can be close using forward slash
-}
-// props.children - component's value that indicates inserted inside content
-
-// static keyword for default props in class components and
+// static keyword is for default props in class components
 const defaultProps = {author: "Clark", body: "Belay, heavy-hearted lad. you won't haul the lighthouse.", date: new Date().toLocaleDateString("en-US") };
-component.defaultProps /* for functional components */
+component.defaultProps = defaultProps; /* for functional components */
 
-constructor(props) {
-    this.state {}
+class ReactComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
 }
-// {!this.props.children ? <UsersList/> : this.props.children }
-// {!this.props.property ? <UsersList {...this.props} /> : null }
 
 // 1. constructor(props)
 // 2. getDerivedStateFromProps(nextProps, prevState) { return null; /* if not */ } // changes are merged
@@ -32,39 +28,22 @@ useEffect(() => {
     return () => {
         window.removeEventListener('mousemove');
     }
-}, [] /* means function doesn't depend on any state. by default, without brackets, it's cDM and CDU combined  */)
+}, []); /* hook doesn't depend on any state. by default, without brackets, it's cDM and CDU combined */
 
 // passing down the setter function:
-const handler: void = () => {};
+const handler = () => {};
 <Component onEventOccured={handler.bind(this/*, ...parameters */)} />
 
 // Context
 const Context = React.createContext();
-// in other file: import Context;
-<Context.Provider value={status: authStatus, login} >put other tags here that will receive context</Context.Provider>
-// using hooks
-// in that file: import Context;
+// passing context to child components
+<Context.Provider value={status: authStatus, login} >put other components here that will receive context</Context.Provider>
+// in that file(functional component): import Context;
 const auth = useContext(Context);
-<>{auth.status ? <Component/> : null}</>
-
-
-// Redux
-
-/*
-Server data(payload) may be stored in Redux, where as component state is stored inside of component
-
-*/
-
-const mapStateToProps = state => {
-  return {
-      users: state.users.data,
-      auth: state.auth.status
-  };
-};
-const mapDispatchToProps = dispatch => {
-  // returns object, containing results of dispatch function on wrapper (after functions are dispatched, they are linked to reducers in Store object)
-  return {
-      fetchUsers = () => dispatch(fetchUsers()), /* fetchUser() is imported action */
-      checkAuth: currentAuthStatus => dispatch(checkAuth(currentAuthStatus)) /* checkAuth() is imported action */
-  };
-};
+const component = () => (
+  <>
+    {auth.status ? <Component/> : null}
+    {auth.status && <Component/>}
+    {auth.status || <Redirect/>}
+  </>
+);
