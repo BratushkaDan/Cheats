@@ -47,3 +47,12 @@ const component = () => (
     {auth.status || <Redirect/>}
   </>
 );
+// state updates may be asynchronous
+// if list of items: 1. doesn't change or values are not computed, 2. items in list have no ids, 3. the list is never reordered or filtered - we are safe to use index, else we ought to use id field from data
+// 'shortid' package generates ids
+// input type='file' is uncontrolled component, it is preferred to use controlled components rathen than uncotrolled ones
+
+// -- Strict Mode:
+// Like Fragment, React.StrictMode doesn't render any additional UI elements. It is used to brace code with potential problems.
+
+// When react diffing two trees, it first compares two root elements. Whenever root elements have different types, react tears down old tree and builds new one from scratch. If elements of the same type or have different classes or children, then DOM keeps the same underling DOM node.

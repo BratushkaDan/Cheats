@@ -271,3 +271,7 @@ xhr.onerror = () => {
 };
 
 xhr.send(/*(JSON.stringify(data) - for POST*/);
+
+// -- Timeouts and Intervals
+this.timerId = setInteval(() => {}, 1000);
+clearInterval(this.timerId); // interval or timeout has to be cleaned for sure
