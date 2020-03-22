@@ -20,6 +20,18 @@ class ReactComponent extends React.Component {
 // 7. componentDidMount() {}
 // 8. componentWillUnmount() {}
 
+/*   Style order of funcitons   */
+// optional static methods
+// constructor
+// componentDidMount
+// shouldComponentUpdate
+// componentDidUpdate
+// componentWillUnmount
+// clickHandlers or eventHandlers like onClickSubmit() or onChangeDescription()
+// getter methods for render like getSelectReason() or getFooterContent()
+// optional render methods like renderNavigation() or renderProfilePicture()
+// render
+
 // React Hooks
 useEffect(() => {
     window.addEventListener('mousemove', () => {});

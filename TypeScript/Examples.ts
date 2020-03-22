@@ -137,6 +137,7 @@ const hasParam: <T>(object: T, prop: 'string') => boolean = (obj, prop) => prop 
 /* protected constructor, getters and setters */
 class Person {
   protected constructor(protected _name: string) {}
+  // Do not use JavaScript getters/setters as they cause unexpected side effects and are harder to test, maintain, and reason about.
   public get name() {
     return this._name;
   }
