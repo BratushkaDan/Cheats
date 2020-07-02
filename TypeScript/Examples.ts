@@ -136,6 +136,7 @@ const isString = (test: any): test is string => typeof test === 'string';
 const hasParam: <T>(object: T, prop: 'string') => boolean = (obj, prop) => prop in obj;
 /* protected constructor, getters and setters */
 class Person {
+  static readonly age: number = 30;
   protected constructor(protected _name: string) {}
   // Do not use JavaScript getters/setters as they cause unexpected side effects and are harder to test, maintain, and reason about.
   public get name() {
@@ -289,4 +290,12 @@ export namespace Validation {
 // Global namespacing
 declare namespace cats {
   interface Kitty {}
+}
+
+// Optional Chaining
+let x = foo?.bar.baz(); // when foo is defined, calculated value is returned, else undefined is returned
+
+// Rest Parameters
+function getAverage(...a: number[]): number {
+  return a.reduce((prev, cur) => prev + cur) / a.length;
 }

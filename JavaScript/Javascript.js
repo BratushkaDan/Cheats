@@ -1,5 +1,5 @@
 // all valid operations: +=, -=, *=, /=, %=, <<=, >>=, >>>=, &=, ^=, = ~int, = |, = &,
-
+let val = 123 === 123 ? true : false; // ternary operator
 // Simple values are assigned/passed by value-copy: null, undefined, string, number, boolean and symbol
 // Compound values objects(arrays, functions, boxed value-wrappers) are assigned/passed by reference
 
@@ -62,6 +62,8 @@ string.padEnd(int, string);// replace everything from int to end with string(rep
 // is number 5e10 // 50000000000
 Number.prototype.toExponential(); // returns number in exponential form
 parseInt(10.3);
+parseInt('FF', 16);
+
 parseFloat(10.4);
 Math.trunc(13.37); /* returns integer part of number */
 
@@ -88,7 +90,7 @@ const object = {
     [Date.now() + 'this is still an object parameter']: 'hey'
 };
 Object.prototype.toString();
-Object.prototype.valueOf();
+Object.prototype.valueOf(); // gets underlying value of primitive (by default primitives are box wrapped by JS automatically in order to easily access things as .length or .toUpperCase() e.g.
 Object.prototype.hasOwnProperty();
 Object.prototype.getOwnPropertyDescriptors();
 Object.keys(Object.prototype);
@@ -146,6 +148,10 @@ let obj = { a: 1 },
     { proxy: pobj, revoke: prevoke } = Proxy.revocable(obj, handlers);
     pobj.a
     prevoke();
+//----- Symbols
+    // symbols are special 'unique' (not strictly guaranteed) values that can be used as properties on objects with little fear of any collision.
+let sym = Symbol("Hello, World!"); // no 'new' keyword for construction
+obj[sym] = 123;
 //----- Iterator
 let array = [1, 2, 3];
 let it = array[Symbol.iterator]();
