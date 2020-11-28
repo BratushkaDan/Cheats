@@ -3,6 +3,8 @@ interface IPoint {
   readonly y: number;
 }
 
+let a: readonly string[] = ['123'];
+
 // custom properties
 interface ICustomObject {
   [propname: string]: string | number;
@@ -44,7 +46,7 @@ const mapArray: IMapArray = (arg1, arg2) => [arg1, arg2];
 interface PageInfo { title: string }
 
 type Page = 'home' | 'about' | 'contact';
-const x: Record<Page, PageInfo> = {
+const ex: Record<Page, PageInfo> = {
   about: {title: 'about'},
   contact: {title: 'contact'},
   home: {title: 'home'},

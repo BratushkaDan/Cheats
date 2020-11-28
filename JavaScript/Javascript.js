@@ -1,10 +1,68 @@
-// all valid operations: +=, -=, *=, /=, %=, <<=, >>=, >>>=, &=, ^=, = ~int, = |, = &,
-let val = 123 === 123 ? true : false; // ternary operator
-// Simple values are assigned/passed by value-copy: null, undefined, string, number, boolean and symbol
-// Compound values objects(arrays, functions, boxed value-wrappers) are assigned/passed by reference
+// ----- Closures https://developer.mozilla.org/ru/docs/Web/JavaScript/Closures
+function makeAdder(x) {
+  function add(y) {
+    return x + y;
+  }
+  return add;
+}
+const adder = makeAdder(1); // adder(y)
 
-// "" is falsy value
-// function is subtype of object with [[Call]] property
+/* Lexical scope */
+function foo() {
+    console.log(a)
+}
+function bar() {
+    var a = 3;
+    foo();
+}
+var a = 2;
+
+bar(); // 2 - a looks for up-most call environment (lexical scope)
+/* Block Scope */
+{
+    let a = 2;
+    console.log(a) // 2;
+}
+console.log(a); // ReferenceError
+
+/* function keyword Function vs arrow Function */
+let obj = {
+    count: 0,
+    cool: function coolFn() {
+        let self = this;
+        if (self.count < 1) {
+            setTimeout(function timer() { // timer function has own lexical scope so self = this binding is necessary
+                self.count++;
+                console.log('Awesome?')
+            }, 100)
+        }
+    }
+};
+let obj2 = {
+    count: 0,
+    cool: function coolFn() {
+        if (this.count < 1) {
+            setTimeout(() => {  // arrow functions never have own lexical scope so this refers to upper lexical scope
+                this.count++;
+                console.log('Awesome?');
+            }, 100)
+        }
+    }
+};
+let obj3 = { // same as previous two
+    count: 0,
+    cool: function coolFn() {
+        if (this.count < 1) {
+            setTimeout(function timer() { // timer function has own lexical scope so self = this binding is necessary
+                this.count++;
+                console.log('Awesome?')
+            }.bind(this), 100)
+        }
+    }
+};
+// Normal instance methods are defined once and used by all instances, properties and arrow functions, which are technically properties too will be duplicated on every instance. Obviously, this duplication is a big overhead if we deal with hundreds or more instances.
+
+// You can’t refer to the this of the surrounding scope inside an ordinary function, whereas Arrow Function solves that problem.
 
 // ----- Arrays
 Array.isArray(Array.prototype);
@@ -36,6 +94,7 @@ Array.prototype.copyWithin(target, start, end); /* [start:end) */ // target - in
 Array.prototype.includes();
 Array.prototype.sort((first, second) => second - first); // desc
 Array.prototype.flat(depth);
+
 // ----- Strings
 /*string is immutable, what is opposed to an array, though some methods can be borrowed from the array*/
 console.log(Array.prototype.map.call("Hello, World!", val => val.repeat(2)));
@@ -58,6 +117,7 @@ string.slice();
 string.substr(idx, extent); // returns string from idx to end, or from idx + extent chars after
 string.padStart(int, string); // replace everything to int with string(repeat)
 string.padEnd(int, string);// replace everything from int to end with string(repeat)
+
 // ----- Numbers
 // is number 5e10 // 50000000000
 Number.prototype.toExponential(); // returns number in exponential form
@@ -85,6 +145,7 @@ Number.isNaN();
 Number.isFinite();
 Number.isInteger();
 Number.isSafeInteger();
+
 // ----- Object
 const object = {
     [Date.now() + 'this is still an object parameter']: 'hey'
@@ -98,6 +159,7 @@ Object.values(Object.prototype);
 Object.entries(Object.prototype);
 Object.is(object, object2);
 Object.assign(object2, object);
+
 // ----- Maps
 const map = new Map();
 map.set(key, value);
@@ -108,6 +170,7 @@ map.size;
 map.has(key);
 const wmap = new WeakMap(); // no size(), clear() and isn't iterable
 wm.set(key, value); // key is object, if key == null, then y becomes null.
+
 // ----- Sets
 const set = new Set();
 set.add(value);
@@ -116,6 +179,7 @@ set.has(value);
 set.clear();
 set.size;
 const wset = new WeakSet();
+
 // ----- Descriptors
 const descriptor = {
     value,
@@ -124,6 +188,7 @@ const descriptor = {
     enumerable: false, // visible for iterators
 }
 Object.defineProperty(Object.prototype, "property", descriptor);
+
 // ----- Proxy
 let obj = { a: 1 },
     handlers = {
@@ -136,7 +201,8 @@ let obj = { a: 1 },
     },
     pobj = new Proxy(obj, handlers);
     obj.a;
-    pobj.a
+    pobj.a;
+
 //----- Revocable Proxy
 let obj = { a: 1 },
     handlers = {
@@ -148,24 +214,38 @@ let obj = { a: 1 },
     { proxy: pobj, revoke: prevoke } = Proxy.revocable(obj, handlers);
     pobj.a
     prevoke();
+
 //----- Symbols
     // symbols are special 'unique' (not strictly guaranteed) values that can be used as properties on objects with little fear of any collision.
 let sym = Symbol("Hello, World!"); // no 'new' keyword for construction
 obj[sym] = 123;
+
 //----- Iterator
 let array = [1, 2, 3];
 let it = array[Symbol.iterator]();
 it.next();
+
 //----- Generators
 function *generator() {
     let arr = [ yield 1, yield 2, yield 3];
 }
+const generator2 = function* (x) {};
 function *additional() {
     yield *[1,2,3];
 }
 for (let v of additional()) {
     console.log(v);
 }
+
+// ----- Async functions
+async function fn() {}
+const fun = async function () {};
+const f = async () => {};
+
+// ----- Async generator functions
+async function* g() {}
+const ag = async function* () {}
+
 //----- User Iterator
 const Fib = {
     [Symbol.iterator]: () => {
@@ -191,14 +271,7 @@ const Fib = {
         }
     }
 };
-// ----- Closures
-function makeAdder(x) {
-    function add(y) {
-        return x + y;
-    }
-    return add;
-}
-const adder = makeAdder(1); // adder(y)
+
 // ----- Promises
 const promise = new Promise((res, rej) => {});
 promise
@@ -210,18 +283,21 @@ Promise.all(promise, promise2)
   .then(result => console.log(result)); /* result is array of promises' result */
 Promise.race(promise, promise2)
   .then(result => console.log(result)); /* result - result of first resolved promise */
+
 // ----- blur(), focus();
 node.focus();
 node.blur();
+
 // ----- Labels
 /*Labels can be assigned to for loops or blocks of code and used with break, continue keywords  */
+
 // ----- Regex
 //Flags
 /*i - regex isn’t case sensitive, g - all matches, m - multiline mode.*/
 String.prototype.search(reg) /*— searches for first match or return -1.*/
 String.prototype.match(reg) /*— without g: returns result, result[0] - first match, result[n] - other matches (if reg grouped by parentheses), result.index - position of match, result.input - str;
 — with g: returns array of matches, null if there’s no matches. */
-String.prototype.split(reg|substring, limit) — /*breaks str into an array using reg, can limit up amount of items.*/
+String.prototype.split(reg|substring, limit) /* — breaks str into an array using reg, can limit up amount of items.*/
 String.prototype.replace(reg, String.prototype|Function.prototype) /*— replaces all the matches of reg, argument can use: $n - inserts n, $& - inserts all the matches, $` - inserts str part before of match, $’ - inserts str part after the match, func cat take the following ars: func(str, [,p1,p2,..], offset, s) — str - found match, [,p1,p2…] - parentheses content(if they’re present), offset - position where match was found, s - initial string.*/
 regex.test(str) /*— returns true/false if there’s a match*/
 regex.exec(str) /*— searches for matches: regex.lastIndex shows where the search is carrying out.

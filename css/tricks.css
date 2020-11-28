@@ -1,9 +1,9 @@
 .double-border {
     border: 3px solid black;
-    /*1*/box-shadow: 0 0 0 12px greenyellow;
-    /*2*/outline: 6px solid #eebdec;
+    box-shadow: 0 0 0 12px greenyellow; /*1*/
+    outline: 6px solid #eebdec; /*2*/
 }
-/* centering can be achived using flexbox and align-items/self-align property */
+/* centering can be achived through using flexbox and align-items/self-align property */
 /* centering one line of text in a container */
 .c {
     height: 300px;

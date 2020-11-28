@@ -44,12 +44,12 @@ useEffect(() => {
 
 // passing down the setter function:
 const handler = () => {};
-<Component onEventOccured={handler.bind(this/*, ...parameters */)} />
+let El = <Component onEventOccured={handler.bind(this/*, ...parameters */)} />;
 
 // Context
 const Context = React.createContext();
 // passing context to child components
-<Context.Provider value={status: authStatus, login} >put other components here that will receive context</Context.Provider>
+let prov = <Context.Provider value={status: authStatus, login} >put other components here that will receive context</Context.Provider>;
 // in that file(functional component): import Context;
 const auth = useContext(Context);
 const component = () => (

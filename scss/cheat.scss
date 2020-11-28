@@ -1,6 +1,22 @@
+// https://sass-scss.ru/documentation/sassscript/
+// css extension - вложенные свойства
+.border-example-class {
+  border: {
+    color: black;
+    style: dashed;
+    spacing: 1px;
+  }
+}
+.card-front {
+  border-radius: {
+    top-left: 50%;
+    top-bottom: 50%;
+  }
+}
+
 $variableColor: #5AFF9E;
 .parent {
-  &.child {} // has to have two classes
+  &.child {} // selector is an element with both .parent and .child classes
   &-sm {} // ampesand is used to generate names
   &-md {}
   &-lg {}
