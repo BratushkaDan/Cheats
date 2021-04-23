@@ -1,20 +1,3 @@
-<meta name="description" content="This is text to help SE find this website!">
-<link rel="stylesheet" href="stylesheet.css"> <!-- Many stylesheet imports allowed-->
-<!--  type="text/css"  is no longer needed -->
-<script src="script.js" defer></script>
-<!-- type="text/javascript" is no longer needed -->
-<meta name="format-detection" content="telephone=no"> <!-- prevents mobile browsers to detect phone numbers -->
-<meta http-equiv="refresh" content="5;url=https://www.example.com/">
-
-<img src="" alt="fallback text" title="hover text">
-<!-- Anchors -->
-<a href="#chapter2"></a>
-<a href="chapter4.html#part2"></a>
-<!-- Miscellaneous -->
-<!-- Sending Email	-->
-<a href="mailto:example@example.com?cc=email@example.com, email2@example.com&bcc=person@example.com&subject=Example+text&body=Message+text">RunCode</a>
-<!-- Handling Disabled Javascript	-->
-<noscript></noscript>
 <!-- Inline code semantics -->
 <pre></pre> <!-- text is written in raw form with all the indents, tabs and breaks -->
 <abbr title=""></abbr>
@@ -25,43 +8,6 @@
 <!-- quotes -->
 <blockquote></blockquote> <!-- represents block with a quote inside -->
 
-
-<!-- Lists -->
-<ol type="1|A|a|I|i"></ol>
-<ul></ul>
-<li></li> <!-- child tag of list -->
-<!--<ol></ol> can be put inside of <li> in order to create nested lists-->
-<dl> <!-- description list -->
-    <dt></dt> <!-- element -->
-    <dd></dd> <!-- description -->
-</dl>
-<!-- Table -->
-<table>
-    <caption></caption> <!--header of table, aligned to the center -->
-    <colgroup> <!-- Element that defines what styling to append for table's columns -->
-        <col style="background-color: #976fd9;" span="1">
-        <col style="background-color: #2AF2FF;" span="3">
-    </colgroup>
-    <thead> <!-- semantic tags in order to help programmers read code -->
-        <tr>
-            <!-- Scope attribute is used to improve accessibility		-->
-            <th scope="col"></th> <!-- -->
-            <th></th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody> <!-- semantic tags in order to help programmers read code -->
-        <tr> <!-- table row -->
-            <!-- Here <th></th> can be insterted to represent a row's header -->
-            <th scope="row"></th>
-            <td colspan="2"> <!-- takes 2 rows of the table --></td> <!-- table cell -->
-            <td rowspan="4"> <!-- takes 4 columns of the table --></td>
-            <!-- If place is taken, other elements must be removed -->
-            <td></td>
-        </tr>
-    </tbody>
-    <tfoot></tfoot> <!-- Respresents rows that summarize table's contents -->
-</table>
 <!-- Content sectioning. Semantic tags. -->
 <header></header> <!-- Website navigation or introduction -->
 <main></main> <!-- Dominant content -->
@@ -84,33 +30,12 @@
     <summary></summary> <!-- Specifies a text for details dropdown -->
     <!--	content-->
 </details>
-<!-- Forms-->
-<form action="" method="post"></form> <!-- A container for interactive input elements -->
-<label for=""></label> <!-- gives context to the inputs and gives reference to form action element -->
-<fieldset></fieldset> <!-- groups inputs -->
-<legend></legend> <!-- fieldset's child element, header -->
+
 <figure> <!-- Semantic tag for a single media unit -->
     <figcaption>I describe the content</figcaption> <!-- text that describes the content of figure tag -->
     <!-- One of media, video, img or code snippet contents-->
 </figure>
-<textarea name="" id=""></textarea>
-<input type="text"> <!-- Possible attributes: id, value, name, type, placeholder, disabled, autofocus, step -->
-<!-- type="checkbox|radio" - attributes: checked -->
-<input type="radio" name="color" id="red" value="#ffffff"> <!-- name has to be the same for all inputs -->
-<input type="radio" name="color" id="blue" value="#ffffff">
-<input type="radio" name="color" id="green" value="#ffffff">
 
-<input type="color" name="favcolor" value="#ff4dde">
-<input type="password">
-<input type="file" name="upload" accept="image/x-png,image/gif,image/jpe?g"> <!-- multiple attributes makes input upload multiple files-->
-<!-- accept attribute specifies format of accepted files -->
-<input type="reset">
-<input type="tel">
-<input type="number">
-<input type="range">
-<input type="datetime-local">
-<input type="time">
-<input type="date">
 <!-- HTML form events: onblur - element loses focus, onchange, onfocus, onsubmit -->
 <select name="year" id="yearSelect"> <!-- select dropdown -->
     <optgroup label="First group">
@@ -125,57 +50,3 @@
 <datalist id="list"> <!-- dropdown -->
     <!-- options -->
 </datalist>
-<!-- Interactive -->
-<progress id="file" value="32" max="100"></progress> <!-- label can be also bound -->
-<!-- Media -->
-    <audio src="assets/audio.mp3" controls></audio>
-    <!-- attributes -->
-    <!-- autoplay - аудиофайл начнет проигрываться сразу после загрузки страницы -->
-    <!-- controls - атрибут "включает" элементы управления -->
-    <!-- loop - атрибут заставляет файл проигрываться снова и снова -->
-    <!-- muted - выключает звук -->
-    <!-- src - указывает на расположение аудиофайла -->
-    <!-- preload - управляет предварительной загрузкой файла и может иметь следующие значения: -->
-    <!-- none - file data doesn't load -->
-    <!-- metadata - only file data is loaded -->
-    <!-- auto - default, file is prealoaded -->
-    <audio controls="controls">
-        <source src="assets/audio.ogg">
-    </audio>
-
-    <video src="../assets/video2.mp4" controls poster="../assets/poster_for_video.jpg"></video>
-    <!-- autoplay, controls, loop, muted, poster="path_to_img", preload: auto | metadata | none-->
-
-    <video autoplay controls>
-        <source src="../assets/video2.mp4" type="video/mp4">
-        <track src="../assets/video2_subtitles.srt"
-               kind="subtitles"
-               srclang="ru"
-               label="Русский"
-               default> <!-- default indicates that this file will be used by default -->
-        <!-- track tag allows to attach a subtitles file to our video tag -->
-        <track src="../assets/video2_captions.srt"
-               kind="captions"
-               srclang="ru"
-               label="Описание видео">
-    </video>
-    <!-- Subtitles format: -->
-    <pre>
-        WEBVTT
-        00:00:10.000 --> 00:00:12.500
-        the inscription is displayed from 10s to 12s
-
-        00:00:13.200 --> 00:00:16.900
-        the inscription is displayed from 13.2s to 16.9s
-
-        00:00:17.200 --> 00:01:05.800
-        &lt;p&gt;Text shows that subtitles&lt;/p&gt;
-        &lt;p&gt;can be multi-lined if they are&lt;/p&gt;
-        &lt;p&gt;created using HTML tags&lt;/p&gt;
-    </pre>
-<!-- BEM -->
-<div class="nav nav_right nav_newYearStyle"><div class="nav__item"></div></div>
-<!-- nav_right - float right, nav_newYearStyle - Festive Look -->
-<!-- element is only element, nav will have width, height, font-size etc parameters, modificator will change them in case it has -->
-<!-- block's style CAN'T affect any other components! -->
-<!-- block's modificator style CAN affect any other components. -->
